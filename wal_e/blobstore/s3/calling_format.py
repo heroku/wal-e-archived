@@ -17,18 +17,10 @@ _S3_REGIONS = {
     'eu-central-1': u's3-eu-central-1.amazonaws.com',
     'eu-west-1': u's3-eu-west-1.amazonaws.com',
     'sa-east-1': u's3-sa-east-1.amazonaws.com',
-    'us-east-1': u's3.amazonaws.com',
+    'us-east-1': u's3-external-1.amazonaws.com',
     'us-west-1': u's3-us-west-1.amazonaws.com',
     'us-west-2': u's3-us-west-2.amazonaws.com',
 }
-
-try:
-    # Override the hard-coded region map with boto's mappings if
-    # available.
-    from boto.s3 import regions
-    _S3_REGIONS.update(dict((r.name, r.endpoint) for r in regions()))
-except ImportError:
-    pass
 
 
 def _is_ipv4_like(s):

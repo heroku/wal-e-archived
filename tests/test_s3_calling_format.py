@@ -92,7 +92,7 @@ def test_cert_validation_sensitivity(monkeypatch):
             cinfo = calling_format.from_store_name(bn)
             assert (cinfo.calling_format == connection.OrdinaryCallingFormat)
             assert cinfo.region == 'us-east-1'
-            assert cinfo.ordinary_endpoint == u's3.amazonaws.com'
+            assert cinfo.ordinary_endpoint == u's3-external-1.amazonaws.com'
 
 
 @pytest.mark.skipif("no_real_s3_credentials()")
@@ -154,7 +154,7 @@ def test_str_repr_call_info(monkeypatch):
     assert repr(cinfo) == (
         "CallingInfo(hello.world, "
         "<class 'boto.s3.connection.OrdinaryCallingFormat'>, "
-        "'us-east-1', u's3.amazonaws.com')"
+        "'us-east-1', u's3-external-1.amazonaws.com')"
     )
 
     cinfo = calling_format.from_store_name('Hello-World')
@@ -162,7 +162,7 @@ def test_str_repr_call_info(monkeypatch):
     assert repr(cinfo) == (
         "CallingInfo(Hello-World, "
         "<class 'boto.s3.connection.OrdinaryCallingFormat'>, "
-        "'us-east-1', u's3.amazonaws.com')"
+        "'us-east-1', u's3-external-1.amazonaws.com')"
     )
 
 
