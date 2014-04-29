@@ -12,6 +12,9 @@ from wal_e.worker.s3 import s3_deleter
 assert fast_wait
 
 
+ISO8601 = '%Y-%m-%dT%H:%M:%SZ'
+
+
 class BucketDeleteKeysCollector(object):
     """A callable to stand-in for bucket.delete_keys
 
@@ -85,6 +88,18 @@ def never_use_single_delete(monkeypatch):
     monkeypatch.setattr(bucket.Bucket, 'delete_key', die)
 
 
+def make_key(*args, **kwargs):
+    from datetime import datetime
+    from datetime import timedelta
+
+    k = key.Key(*args, **kwargs)
+
+    last_modified = (datetime.now() - timedelta(days=60)).strftime(ISO8601)
+    k.last_modified = last_modified
+
+    return k
+
+
 def test_construction():
     """The constructor basically works."""
     s3_deleter.Deleter()
@@ -103,7 +118,7 @@ def test_close_error():
 def test_processes_one_deletion(b, collect):
     # Mock up a key and bucket
     key_name = 'test-key-name'
-    k = key.Key(bucket=b, name=key_name)
+    k = make_key(bucket=b, name=key_name)
 
     d = s3_deleter.Deleter()
     d.delete(k)
@@ -118,7 +133,7 @@ def test_processes_many_deletions(b, collect):
 
     # Construct boto S3 Keys from the generated names and delete them
     # all.
-    keys = [key.Key(bucket=b, name=key_name) for key_name in target]
+    keys = [make_key(bucket=b, name=key_name) for key_name in target]
     d = s3_deleter.Deleter()
 
     for k in keys:
@@ -135,7 +150,7 @@ def test_processes_many_deletions(b, collect):
 def test_retry_on_normal_error(b, collect):
     """Ensure retries are processed for most errors."""
     key_name = 'test-key-name'
-    k = key.Key(bucket=b, name=key_name)
+    k = make_key(bucket=b, name=key_name)
 
     collect.inject(Exception('Normal error'))
     d = s3_deleter.Deleter()
@@ -161,7 +176,7 @@ def test_retry_on_normal_error(b, collect):
 def test_no_retry_on_keyboadinterrupt(b, collect):
     """Ensure that KeyboardInterrupts are forwarded."""
     key_name = 'test-key-name'
-    k = key.Key(bucket=b, name=key_name)
+    k = make_key(bucket=b, name=key_name)
 
     # If vanilla KeyboardInterrupt is used, then sending SIGINT to the
     # test can cause it to pass improperly, so use a subtype instead.

@@ -1,6 +1,9 @@
+import boto
 import gevent
 import re
 
+from datetime import datetime
+from datetime import timedelta
 from gevent import queue
 from wal_e import exception
 from wal_e import log_help
@@ -187,6 +190,9 @@ class _BackupList(object):
                     yield info
 
 
+SAFEGUARD_DAYS = timedelta(days=25)
+
+
 class _DeleteFromContext(object):
 
     def __init__(self, conn, layout, dry_run):
@@ -200,11 +206,19 @@ class _DeleteFromContext(object):
     def _container_name(self, key):
         pass
 
-    def _maybe_delete_key(self, key, type_of_thing):
+    def _maybe_delete_key(self, key, type_of_thing, paranoia=False):
+        if paranoia:
+            # Skip this key if it's too new, even if it otherwise
+            # qualifies.
+            last_modified = boto.utils.parse_ts(key.last_modified)
+            if (datetime.utcnow() - last_modified) <= SAFEGUARD_DAYS:
+                return
+
         key_name = self.layout.key_name(key)
         url = '{scheme}://{bucket}/{name}'.format(
             scheme=self.layout.scheme, bucket=self._container_name(key),
             name=key_name)
+
         log_message = dict(
             msg='deleting {0}'.format(type_of_thing),
             detail='The key being deleted is {url}.'.format(url=url))
@@ -406,10 +420,10 @@ class _DeleteFromContext(object):
 
         """
         for k in self._backup_list(prefix=self.layout.basebackups()):
-            self._maybe_delete_key(k, 'part of a base backup')
+            self._maybe_delete_key(k, 'part of a base backup', paranoia=True)
 
         for k in self._backup_list(prefix=self.layout.wal_directory()):
-            self._maybe_delete_key(k, 'part of wal logs')
+            self._maybe_delete_key(k, 'part of wal logs', paranoia=True)
 
         if self.deleter:
             self.deleter.close()
