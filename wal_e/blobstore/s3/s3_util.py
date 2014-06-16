@@ -24,7 +24,7 @@ if not boto.config.has_option('Boto', 'http_socket_timeout'):
     if not boto.config.has_section('Boto'):
         boto.config.add_section('Boto')
 
-    boto.config.set('Boto', 'http_socket_timeout', '5')
+    boto.config.set('Boto', 'http_socket_timeout', '30')
 
 
 def _uri_to_key(creds, uri, conn=None):
