@@ -272,6 +272,17 @@ def build_parser():
         action='store_true',
         default=False)
 
+    backup_verify_parser = subparsers.add_parser(
+        'backup-verify', help='verify an already-restored backup',
+        parents=[backup_fetchpush_parent])
+    backup_verify_parser.add_argument(
+        '--verify-checksums',
+        help=('Verify checksums of restored files. '
+              '(by default wal-e verifies only the size of restored files'),
+        dest='verify_checksums',
+        action='store_true',
+        default=False)
+
     # wal-push operator section
     wal_push_parser = subparsers.add_parser(
         'wal-push', help='push a WAL file to S3 or WABS',
@@ -297,6 +308,13 @@ def build_parser():
               'restoration (optional, see README for more information).'),
         type=str,
         default=None)
+    backup_fetch_parser.add_argument(
+        '--verify-checksums',
+        help=('Verify checksums of restored files. '
+              '(by default wal-e verifies only the size of restored files'),
+        dest='verify_checksums',
+        action='store_true',
+        default=False)
 
     # backup-list operator section
     backup_list_parser.add_argument(
@@ -539,12 +557,18 @@ def main():
             monkeypatch_tarfile_copyfileobj()
 
             external_program_check([LZOP_BIN])
+            if args.verify_checksums:
+                backup_cxt.verify_checksums = True
             backup_cxt.database_fetch(
                 args.PG_CLUSTER_DIRECTORY,
                 args.BACKUP_NAME,
                 blind_restore=args.blind_restore,
                 restore_spec=args.restore_spec,
                 pool_size=args.pool_size)
+        elif subcommand == 'backup-verify':
+            if args.verify_checksums:
+                backup_cxt.verify_checksums = True
+            backup_cxt.database_verify(args.PG_CLUSTER_DIRECTORY)
         elif subcommand == 'backup-list':
             backup_cxt.backup_list(query=args.QUERY, detail=args.detail)
         elif subcommand == 'backup-push':
@@ -655,3 +679,7 @@ def main():
             msg='An unprocessed exception has avoided all error handling',
             detail=''.join(traceback.format_exception(*sys.exc_info())))
         sys.exit(2)
+
+
+if __name__ == "__main__":
+        main()

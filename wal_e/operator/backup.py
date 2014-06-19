@@ -12,6 +12,7 @@ from wal_e import log_help
 from wal_e import storage
 from wal_e import tar_partition
 from wal_e.exception import UserException, UserCritical
+from wal_e.worker import manifest
 from wal_e.worker import prefetch
 from wal_e.worker import (WalSegment,
                           WalUploader,
@@ -39,6 +40,7 @@ class Backup(object):
         self.creds = creds
         self.gpg_key_id = gpg_key_id
         self.exceptions = []
+        self.verify_checksums = False
 
     def new_connection(self):
         return self.cinfo.connect(self.creds)
@@ -126,6 +128,13 @@ class Backup(object):
             # use pg_cluster_dir as the resore prefix
             backup_info.spec['base_prefix'] = pg_cluster_dir
 
+        manifests_dir = manifest.directory(pg_cluster_dir)
+        try:
+            os.makedirs(manifests_dir)
+        except EnvironmentError as e:
+            if e.errno != errno.ENOENT:
+                raise
+
         if not blind_restore:
             self._verify_restore_paths(backup_info.spec)
 
@@ -134,6 +143,8 @@ class Backup(object):
             connections.append(self.new_connection())
 
         partition_iter = self.worker.TarPartitionLister(
+            connections[0], self.layout, backup_info)
+        manifest_iter = self.worker.ManifestLister(
             connections[0], self.layout, backup_info)
 
         assert len(connections) == pool_size
@@ -152,8 +163,96 @@ class Backup(object):
                 self._exception_gather_guard(
                     fetcher_cycle.next().fetch_partition),
                 part_name)
-
+        for part_name in manifest_iter:
+            p.spawn(
+                self._exception_gather_guard(
+                    fetcher_cycle.next().fetch_manifest),
+                part_name, manifests_dir)
         p.join(raise_error=True)
+
+        with open(os.path.join(pg_cluster_dir,
+                               '.wal-e', 'restore-spec.json'), 'w') as f:
+            json.dump(backup_info.spec, f, indent=4)
+
+        with open(os.path.join(pg_cluster_dir,
+                               '.wal-e', 'backup-info.json'), 'w') as f:
+            json.dump(backup_info.details(), f, indent=4)
+
+        logger.info('Verifying database against manifests from {}'.
+                    format(manifests_dir))
+        if self._database_verify(backup_info.spec['base_prefix'],
+                                 manifests_dir,
+                                 backup_info):
+            logger.info('Restore succeeded and passed verification')
+        else:
+            logger.info('Restore finished but FAILED verification')
+            raise UserException(
+                msg='Verification of database failed',
+                detail='Check logs for details of discrepancies found')
+
+    def database_verify(self, data_directory):
+        """
+        User command which finds the most recent database restore wale
+        info dir and invokes verification based on that. This only
+        works immediately after restore before any database recovery
+        of course.
+        """
+        manifests_dir = manifest.directory(data_directory)
+
+        if not os.path.isdir(manifests_dir):
+            raise UserException(
+                msg='Did not find a valid WAL-E restore information',
+                detail='Expected to find a directory named .wal-e/restore_info'
+            )
+
+        logger.info('Verifying database against manifests from {}'
+                    ''.format(manifests_dir))
+
+        with open(os.path.join(data_directory,
+                               '.wal-e', 'restore-spec.json'), 'r') as f:
+            spec = json.load(f)
+
+        if self._database_verify(data_directory, manifests_dir, spec):
+            logger.info('Verification against manifests passed')
+        else:
+            logger.info('Verification against manifests FAILED')
+            raise UserException(
+                msg='Verification of database failed',
+                detail='Check logs for details of discrepancies found')
+
+    def _database_verify(self, data_directory, manifests_dir, spec):
+        """
+        Common code for restore and verify that does the actual
+        verification for the given directory and wale info dir.
+        """
+        retval = True
+        num_partitions_verified = 0
+        num_files_verified = 0
+        num_bytes_verified = 0
+
+        for fname in os.listdir(manifests_dir):
+            logger.debug('verifying manifest file {}'.format(fname))
+            result, nfiles, nbytes = (
+                manifest.verify(data_directory,
+                                os.path.join(manifests_dir, fname),
+                                self.verify_checksums))
+            if not result:
+                retval = False
+            num_partitions_verified += 1
+            num_files_verified += nfiles
+            num_bytes_verified += nbytes
+
+        if (hasattr(spec, 'number_of_partitions') and
+            spec.number_of_partitions > num_partitions_verified):
+            logger.error('Only found {} out of {} manifest files to verify')
+            retval = False
+        logger.info('Verified {} bytes in {} files from {} tar partitions ({})'
+                    ''.format(num_bytes_verified,
+                              num_files_verified,
+                              num_partitions_verified,
+                              ('(using checksums)' if self.verify_checksums
+                               else '(NOT using checksums)')))
+        return retval
 
     def database_backup(self, data_directory, *args, **kwargs):
         """Uploads a PostgreSQL file cluster to S3 or Windows Azure Blob
@@ -195,7 +294,7 @@ class Backup(object):
             ret_tuple = self._upload_pg_cluster_dir(
                 start_backup_info, data_directory, version=version, *args,
                 **kwargs)
-            spec, uploaded_to, expanded_size_bytes = ret_tuple
+            spec, uploaded_to, expanded_size_bytes, num_parts = ret_tuple
             upload_good = True
         finally:
             if not upload_good:
@@ -222,12 +321,14 @@ class Backup(object):
             # definitely run its course and also communicates what WAL
             # segments are needed to get to consistency.
             sentinel_content = StringIO()
+            assert(num_parts > 0)
             json.dump(
                 {'wal_segment_backup_stop':
                     stop_backup_info['file_name'],
                  'wal_segment_offset_backup_stop':
                     stop_backup_info['file_offset'],
                  'expanded_size_bytes': expanded_size_bytes,
+                 'number_of_partitions': num_parts,
                  'spec': spec},
                 sentinel_content)
 
@@ -475,6 +576,7 @@ class Backup(object):
         assert per_process_limit > 0 or per_process_limit is None
 
         total_size = 0
+        num_parts = 0
 
         # Make an attempt to upload extended version metadata
         extended_version_url = backup_prefix + '/extended_version.txt'
@@ -496,6 +598,7 @@ class Backup(object):
         # Enqueue uploads for parallel execution
         for tpart in parts:
             total_size += tpart.total_member_size
+            num_parts += 1
 
             # 'put' can raise an exception for a just-failed upload,
             # aborting the process.
@@ -505,7 +608,7 @@ class Backup(object):
         # raised to signal failure of the upload.
         pool.join()
 
-        return spec, backup_prefix, total_size
+        return spec, backup_prefix, total_size, num_parts
 
     def _exception_gather_guard(self, fn):
         """
