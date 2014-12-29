@@ -323,7 +323,8 @@ class _DeleteFromContext(object):
                 match = re.match(
                     storage.BASE_BACKUP_REGEXP, key_parts[-3])
 
-                if match is None or key_parts[-2] != 'tar_partitions':
+                okay_paths = ('tar_partitions', 'manifests')
+                if match is None or key_parts[-2] not in okay_paths:
                     logger.warning(
                         msg="skipping non-qualifying key in 'delete before'",
                         detail=(
