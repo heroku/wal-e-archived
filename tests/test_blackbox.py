@@ -151,7 +151,7 @@ def test_backup_push_fetch(tmpdir, small_push_dir, monkeypatch, config,
         victim = random.choice(list(
             verify_dir.visit(lambda f: stat.S_ISREG(f.lstat().mode),
                              lambda f: not f.fnmatch(".wal-e"))))
-        print "Removing victim file {}\n".format(unicode(victim))
+        print "Removing victim file {0}".format(unicode(victim))
         os.unlink(unicode(victim))
         config.main('backup-verify', unicode(verify_dir))
 
@@ -162,7 +162,7 @@ def test_backup_push_fetch(tmpdir, small_push_dir, monkeypatch, config,
         victim = random.choice(list(
             verify_dir.visit(lambda f: stat.S_ISREG(f.lstat().mode),
                              lambda f: not f.fnmatch(".wal-e"))))
-        print "Appending to victim file {}\n".format(unicode(victim))
+        print "Appending to victim file {0}".format(unicode(victim))
         with open(unicode(victim), 'ab') as fileobj:
             fileobj.write('xyzzy')
         config.main('backup-verify', unicode(verify_dir))
@@ -174,7 +174,7 @@ def test_backup_push_fetch(tmpdir, small_push_dir, monkeypatch, config,
         verify_dir.visit(lambda f: (stat.S_ISREG(f.lstat().mode) and
                                     f.size() > len('xyzzy')),
                          lambda f: not f.fnmatch(".wal-e"))))
-    print "Overwriting victim file {} (size {})\n".format(unicode(victim),
+    print "Overwriting victim file {0} (size {1})".format(unicode(victim),
                                                           victim.size())
     with open(unicode(victim), 'r+b') as fileobj:
         # hopefully this string is not in our existing files

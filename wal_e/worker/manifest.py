@@ -29,7 +29,7 @@ def verify(base, manifest, checksums=False):
         try:
             statres = os.lstat(filename)
         except OSError, e:
-            logger.warning('Could not verify {}: {}'
+            logger.warning('Could not verify {0}: {1}'
                            ''.format(entry['name'], e.strerror))
             retval = False
             continue
@@ -47,24 +47,24 @@ def verify(base, manifest, checksums=False):
                              mode=statres.st_mode))
         elif not stat.S_ISREG(statres.st_mode):
             retval = False
-            logger.warning('expected regular file of length {} '
-                           'instead found {} mode {:06o}'
+            logger.warning('expected regular file of length {0} '
+                           'instead found {1} mode {:06o}'
                            ''.format(size,
                                      filename,
                                      statres.st_mode))
 
         elif statres.st_size != size:
             retval = False
-            logger.warning('expected regular file of length {} '
-                           'instead found {} size {}'
+            logger.warning('expected regular file of length {0} '
+                           'instead found {1} size {2}'
                            ''.format(size,
                                      filename,
                                      statres.st_size))
 
         elif (checksums and _checksum_file(filename) != hexdigest):
             retval = False
-            logger.warning('file {} checksum mismatch '
-                           '(expected sha1 of {})'
+            logger.warning('file {0} checksum mismatch '
+                           '(expected sha1 of {1})'
                            ''.format(filename, hexdigest))
         else:
             nfiles += 1

@@ -178,7 +178,7 @@ class Backup(object):
                                '.wal-e', 'backup-info.json'), 'w') as f:
             json.dump(backup_info.details(), f, indent=4)
 
-        logger.info('Verifying database against manifests from {}'.
+        logger.info('Verifying database against manifests from {0}'.
                     format(manifests_dir))
         if self._database_verify(backup_info.spec['base_prefix'],
                                  manifests_dir,
@@ -205,7 +205,7 @@ class Backup(object):
                 detail='Expected to find a directory named .wal-e/restore_info'
             )
 
-        logger.info('Verifying database against manifests from {}'
+        logger.info('Verifying database against manifests from {0}'
                     ''.format(manifests_dir))
 
         with open(os.path.join(data_directory,
@@ -231,7 +231,7 @@ class Backup(object):
         num_bytes_verified = 0
 
         for fname in os.listdir(manifests_dir):
-            logger.debug('verifying manifest file {}'.format(fname))
+            logger.debug('verifying manifest file {0}'.format(fname))
             result, nfiles, nbytes = (
                 manifest.verify(data_directory,
                                 os.path.join(manifests_dir, fname),
@@ -244,14 +244,22 @@ class Backup(object):
 
         if (hasattr(spec, 'number_of_partitions') and
             spec.number_of_partitions > num_partitions_verified):
-            logger.error('Only found {} out of {} manifest files to verify')
+            logger.error(msg='could not find all expected manifest files',
+                         detail=('Only found {0} out of {1} manifest files to '
+                                 'verify').format(num_partitions_verified,
+                                                  spec.number_of_partitions))
             retval = False
-        logger.info('Verified {} bytes in {} files from {} tar partitions ({})'
-                    ''.format(num_bytes_verified,
-                              num_files_verified,
-                              num_partitions_verified,
-                              ('(using checksums)' if self.verify_checksums
-                               else '(NOT using checksums)')))
+
+        logger.info(msg='verified files from manifest',
+                    detail=(
+                        'Verified {0} bytes in {1} files from {2} '
+                        'tar partitions ({3})'
+                        .format(num_bytes_verified,
+                                num_files_verified,
+                                num_partitions_verified,
+                                ('using checksums'
+                                 if self.verify_checksums
+                                 else 'NOT using checksums'))))
         return retval
 
     def database_backup(self, data_directory, *args, **kwargs):
