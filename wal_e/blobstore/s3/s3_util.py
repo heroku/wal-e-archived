@@ -136,6 +136,9 @@ def do_lzop_get(creds, url, path, decrypt, do_retry=True):
                         decomp_out.remove_regardless = True
                         return False
                     else:
+                        logger.warning(msg='S3 response error',
+                                       detail='The error is: {0}, {1}'
+                                       .format(e.error_code, e.error_message))
                         raise
 
             logger.info(
