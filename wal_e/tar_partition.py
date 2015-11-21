@@ -557,45 +557,6 @@ def partition(pg_cluster_dir):
             else:
                 matches.append(os.path.join(root, filename))
 
-        # Special case for tablespaces
-        if root == os.path.join(pg_cluster_dir, 'pg_tblspc'):
-            for tablespace in dirnames:
-                ts_path = os.path.join(root, tablespace)
-                ts_name = os.path.basename(ts_path)
-
-                if os.path.islink(ts_path) and os.path.isdir(ts_path):
-                    ts_loc = os.readlink(ts_path)
-                    ts_walker = os.walk(ts_path)
-                    if not ts_loc.endswith(os.path.sep):
-                        ts_loc += os.path.sep
-
-                    if ts_name not in spec['tablespaces']:
-                        spec['tablespaces'].append(ts_name)
-                        link_start = len(spec['base_prefix'])
-                        spec[ts_name] = {
-                            'loc': ts_loc,
-                            # Link path is relative to base_prefix
-                            'link': ts_path[link_start:]
-                        }
-
-                    for ts_root, ts_dirnames, ts_filenames in ts_walker:
-                        if 'pgsql_tmp' in ts_dirnames:
-                            ts_dirnames.remove('pgsql_tmp')
-                            matches.append(os.path.join(ts_root, 'pgsql_tmp'))
-
-                        for ts_filename in ts_filenames:
-                            matches.append(os.path.join(ts_root, ts_filename))
-
-                        # pick up the empty directories, make sure ts_root
-                        # isn't duplicated
-                        if not ts_filenames and ts_root not in matches:
-                            matches.append(ts_root)
-
-                    # The symlink for this tablespace is now in the match list,
-                    # remove it.
-                    if ts_path in matches:
-                        matches.remove(ts_path)
-
     # Absolute upload paths are used for telling lzop what to compress. We
     # must evaluate tablespace storage dirs separately from core file to handle
     # the case where a common prefix does not exist between the two.
