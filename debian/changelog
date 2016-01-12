@@ -1,0 +1,435 @@
+wal-e-snapshot (2015112101-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sat, 21 Nov 2015 03:53:08 -0800
+
+wal-e-snapshot (2015112001-0heroku1~precise) precise; urgency=medium
+n
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 20 Nov 2015 16:39:43 -0800
+
+wal-e-snapshot (2015102601-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 26 Oct 2015 01:42:18 -0700
+
+wal-e-snapshot (2015102503-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 25 Oct 2015 23:11:59 -0700
+
+wal-e-snapshot (2015102502-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 25 Oct 2015 22:53:40 -0700
+
+wal-e-snapshot (2015102501-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 25 Oct 2015 21:11:09 -0700
+
+wal-e-snapshot (2015102401-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sat, 24 Oct 2015 14:13:22 -0700
+
+wal-e-snapshot (2015102301-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 23 Oct 2015 22:45:05 -0700
+
+wal-e-snapshot (2015032002-0heroku1~precise) precise; urgency=medium
+
+  * Remove aggressive async I/O hack
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 20 Mar 2015 17:15:43 -0700
+
+wal-e-snapshot (2015032001-0heroku1~trusty) trusty; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 20 Mar 2015 09:09:11 -0700
+
+wal-e-snapshot (2015012001-0heroku1~trusty) trusty; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 20 Jan 2015 21:22:15 -0800
+
+wal-e-snapshot (2014122902-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 18 Jan 2015 15:28:56 -0800
+
+wal-e-snapshot (2014060401-0heroku1~precise) precise; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 04 Jun 2014 12:48:50 -0700
+
+wal-e-snapshot (2014022801-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 28 Feb 2014 02:51:45 -0800
+
+wal-e-snapshot (2014022501-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 25 Feb 2014 15:29:40 -0800
+
+wal-e-snapshot (2014022301-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 23 Feb 2014 12:52:59 -0800
+
+wal-e-snapshot (2014021901-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 19 Feb 2014 16:02:24 -0800
+
+wal-e-snapshot (2014021802-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 18 Feb 2014 21:03:27 -0800
+
+wal-e-snapshot (2014021801-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 18 Feb 2014 16:58:46 -0800
+
+wal-e-snapshot (2014020301-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 03 Feb 2014 00:10:12 -0800
+
+wal-e-snapshot (2014013101-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 31 Jan 2014 12:30:35 -0800
+
+wal-e-snapshot (2014012901-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 29 Jan 2014 00:17:53 -0800
+
+wal-e-snapshot (2014011401-0heroku1~precise) precise; urgency=low
+
+  * New upstream (alpha) release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 14 Jan 2014 15:40:48 -0800
+
+wal-e-snapshot (2013102501-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 25 Oct 2013 02:39:10 -0700
+
+wal-e-snapshot (2013101001-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 10 Oct 2013 06:26:52 -0700
+
+wal-e-snapshot (2013092701-0heroku2~precise) precise; urgency=low
+
+  * Increment boto required version
+  * Increment gevent required version
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 04 Oct 2013 14:41:46 -0700
+
+wal-e-snapshot (2013092701-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 27 Sep 2013 14:47:54 -0700
+
+wal-e-snapshot (2013072601-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 26 Jul 2013 17:04:06 -0700
+
+wal-e-snapshot (2013072301-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 23 Jul 2013 19:10:14 -0700
+
+wal-e-snapshot (2013071803-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+  * Backport default parallelism of 8
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 18 Jul 2013 20:05:02 -0700
+
+wal-e-snapshot (2013071802-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 18 Jul 2013 17:09:12 -0700
+
+wal-e-snapshot (2013071801-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 18 Jul 2013 12:29:52 -0700
+
+wal-e-snapshot (2013071601-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 16 Jul 2013 15:50:13 -0700
+
+wal-e-snapshot (2013070201-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 02 Jul 2013 15:43:52 -0700
+
+wal-e-snapshot (2013063001-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Sun, 30 Jun 2013 10:50:55 -0700
+
+wal-e-snapshot (2013062002-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 20 Jun 2013 23:28:23 -0700
+
+wal-e-snapshot (2013062001-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 20 Jun 2013 12:57:36 -0700
+
+wal-e-snapshot (2013061401-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 14 Jun 2013 01:02:27 -0700
+
+wal-e-snapshot (2013061101-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 11 Jun 2013 02:34:58 -0700
+
+wal-e-snapshot (2013061001-0heroku2~precise) precise; urgency=low
+
+  * Try incrementing version to solve complaints about full source
+    upload
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 10 Jun 2013 22:57:01 -0700
+
+wal-e-snapshot (2013061001-0heroku1~precise) precise; urgency=low
+
+  * New upstream release
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 10 Jun 2013 22:39:15 -0700
+
+wal-e-snapshot (20130402-0heroku1~precise) precise; urgency=low
+
+  * New upstream snapshot
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 02 Apr 2013 16:41:10 -0700
+
+wal-e (0.5.13c1-1heroku~precise1) precise; urgency=low
+
+  * Removed dependency on argparse, which is in Python 2.7
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 31 Aug 2012 16:33:12 -0700
+
+wal-e (0.5.13c1-1heroku~precise0) precise; urgency=low
+
+  * New upstream release candidate
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 31 Aug 2012 14:45:52 -0700
+
+wal-e (0.5.9+0.5.10c1-1heroku~lucid~ppa1) lucid; urgency=low
+
+  * New upstream release candidate
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 21 Dec 2011 13:15:56 -0800
+
+wal-e (0.5.8+0.5.9c1-1heroku~lucid~ppa0) lucid; urgency=low
+
+  * New upstream release candidate
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 10 Nov 2011 15:14:48 -0800
+
+wal-e (0.5.7+0.5.8c4-1heroku~lucid~ppa0) lucid; urgency=low
+
+  * New upstream release candidate
+  * Remove s3cmd dependency (no longer required by upstream)
+  * Depend on boto release 2.0 (new upstream dependency)
+
+ -- Daniel Farina <drfarina@acm.org>  Tue, 25 Oct 2011 14:40:26 -0700
+
+wal-e (0.5.7~pre0-1ubuntu1ppa1) lucid; urgency=low
+
+  * v0.5.6dev0
+  * Standardize on EnvironmentError for errno checking exception paths
+  * Pad files with zeros when in the non-rate-limited code path
+  * v0.5.6
+  * v0.5.7dev0
+  * Fix think-o: UserError => UserException
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 06 Jun 2011 15:53:32 -0700
+
+wal-e (0.5.6~pre1-2ubuntu1ppa1) lucid; urgency=low
+
+  * Add brutal hack to avoid non-blocking I/O wrapper in regular pipes
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 01 Jun 2011 12:32:38 -0700
+
+wal-e (0.5.6~pre0-1ubuntu1ppa1) lucid; urgency=low
+
+  * v0.5.6dev0
+  * Introduce boto and gevent dependency
+  * Use non-blocking pipes everywhere in WAL-E
+  * Implement wal-e backup-list QUERY feature
+  * Add TODO about boto retry logic
+  * Pass storage layouts instead of raw s3 prefixes
+  * Split S3 guts out of cmd.py
+  * Fix external program check detection
+  * Normalize option/argument nomenclature
+  * Add closed property to NonBlockPipeFileWrap
+  * Overhaul backup fetch to use boto
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 31 May 2011 17:59:49 -0700
+
+wal-e (0.5.4-1ubuntu1ppa1) lucid; urgency=low
+
+  * v0.5.4dev0
+  * Add tarfile import to the right place, fixing backup-fetch
+  * Remove superfluous tarfile import
+  * Fix a ton of missing symbol problems
+  * v0.5.4
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 06 May 2011 16:28:27 -0700
+
+wal-e (0.5.3-1ubuntu1ppa1) lucid; urgency=low
+
+  * v0.5.3dev0
+  * Fix bugs in --cluster-read-rate-limit
+  * Remove stray line that snuck in
+  * Attempt to fix dyslexia in the 1ubuntu1ppa1 vs 1ppa1ubuntu1 versioning
+  * v0.5.3
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 03 May 2011 14:44:17 -0700
+
+wal-e (0.5.2-1ubuntu1ppa1) lucid; urgency=low
+
+  * Fix README cut-and-pasto about backup fetching
+  * v0.5.2dev0
+  * Capture WAL directory or symlink in a tar (but not contents)
+  * Avoid binding unused symbol
+  * Avoid unnecessary use of a symbol in simple exception handling
+  * Line length fixes
+  * Begin to have some semblance of user error reporting
+  * Fix absurd buffer size for pipes
+  * Improve file-reading pipeline
+  * v0.5.2
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 02 May 2011 17:00:40 -0700
+
+wal-e (0.5.1-1ubuntu1ppa1) lucid; urgency=low
+
+  * v0.5.1dev0
+  * Add TODO about small databases and rate limiting arithmetic gotcha
+  * Handle shrinking files
+  * Fix growing-file handling with mbuffer
+  * v0.5.1
+  * Fix bogus version numbering scheme ("ubuntu" should come first)
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 14 Apr 2011 11:28:12 -0700
+
+wal-e (0.5-1ppa1ubuntu1) lucid; urgency=low
+
+  * v0.5.0.dev0
+  * Add more examples for restoring from a backup to README
+  * Style cleanup
+  * Reduce default concurrency level to four
+  * Use buffered I/O in some pipes
+  * Rename backup sentinel metadata to be more precise
+  * Support throttling via --cluster-read-rate-limit and mbuffer
+  * v0.5.0
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 08 Apr 2011 19:17:13 -0700
+
+wal-e (0.4-1ppa1ubuntu2) lucid; urgency=low
+
+  * Add lzop dependency to control file
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 07 Apr 2011 20:32:41 -0700
+
+wal-e (0.4-1ppa1ubuntu1) lucid; urgency=low
+
+  * 0.4.0.dev0
+  * Format Bump: Switch to JSON backup sentinel with size information
+  * v0.4.0
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 05 Apr 2011 18:02:47 -0700
+
+wal-e (0.3-1ppa1ubuntu2) lucid; urgency=low
+
+  * v0.3.1.dev0
+  * Whitespace
+  * Make argparse dependency optional if running Python 2.7
+  * v0.3.1
+
+ -- Daniel Farina <daniel@heroku.com>  Tue, 05 Apr 2011 17:59:04 -0700
+
+wal-e (0.3-1ppa1ubuntu1) lucid; urgency=low
+
+  * README update
+  * Remove semi-useless recovery-conf-generator subcommand
+  * Timezone pedantry
+  * Use symbolic names for errno interpretation of exceptions
+  * Exclude some more files that may lead to confusion
+  * Re-enable parallel upload of base backups
+  * Remove debugging prints from tarfile implementation
+  * Implement wal-fark
+  * v0.3.0
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 31 Mar 2011 19:46:50 -0700
+
+wal-e (0.2-1ppa1ubuntu1) lucid; urgency=low
+
+  * Implement tar-based volumes
+  * Fix some silly crash bugs
+  * Minor style changes: no known semantic alteration
+
+ -- Daniel Farina <daniel@heroku.com>  Fri, 18 Mar 2011 02:41:21 -0700
+
+wal-e (0.1-1ppa1ubuntu2) lucid; urgency=low
+
+  * Add s3cmd to depends list
+
+ -- Daniel Farina <daniel@heroku.com>  Thu, 17 Mar 2011 11:50:30 -0700
+
+wal-e (0.1-1ppa1ubuntu1) lucid; urgency=low
+
+  * Debianize
+
+ -- Daniel Farina <daniel@heroku.com>  Wed, 16 Mar 2011 15:20:12 -0700

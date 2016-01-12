@@ -1,0 +1,18 @@
+Source: wal-e-snapshot
+Maintainer: Daniel Farina <daniel@heroku.com>
+Section: python
+Priority: optional
+Build-Depends: python-setuptools (>= 0.6b3), debhelper (>= 7.4.3),
+ python-support (>= 0.8.4), libevent-dev (>= 1.4.13-stable)
+Standards-Version: 3.9.3
+
+Package: wal-e-snapshot
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends},
+ lzop (>= 1.0), pv (>= 1.1),
+ libevent-1.4-2 (>= 1.4.13-stable), python-gevent (>= 0.13.1),
+ python-boto (>=2.6.0), python-daemon (>= 1.5.2)
+XB-Python-Version: ${python:Versions}
+Provides: ${python:Provides}
+Conflicts: python-wal-e
+Description: PostgreSQL WAL-shipping for S3
