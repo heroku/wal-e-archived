@@ -1,3 +1,9 @@
+wal-e-snapshot (2016011801-0heroku1~precise) precise; urgency=medium
+
+  * Increment version to test new package building pipeline
+
+ -- Daniel Farina <daniel@heroku.com>  Mon, 18 Jan 2016 14:23:31 -0800
+
 wal-e-snapshot (2015112101-0heroku1~precise) precise; urgency=medium
 
   * New upstream release
