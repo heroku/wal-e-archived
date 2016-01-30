@@ -2,24 +2,25 @@ sudo: required
 dist: trusty
 os: linux
 env:
-- DIST=precise
+  - DIST=precise
+  - DIST=trusty
 cache:
   directories:
   - "$HOME/pbuilder/"
 before_cache:
-- rm -rf $HOME/pbuilder/aptcache
+  - rm -rf $HOME/pbuilder/aptcache
 before_install:
-- sudo apt-get update -qq
-- sudo apt-get install -qq --no-install-recommends devscripts libwww-perl pbuilder
-  aptitude ubuntu-dev-tools dh-make autotools-dev
-- mkdir -p $HOME/pbuilder $HOME/result
-- test -e $HOME/pbuilder/${DIST}-base.tgz && pbuilder-dist ${DIST} update || pbuilder-dist
-  ${DIST} create --debootstrapopts --variant=buildd
-- sudo apt-get purge -qq libwww-perl
-- sudo apt-get autoremove -qq
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq --no-install-recommends devscripts libwww-perl pbuilder
+    aptitude ubuntu-dev-tools dh-make autotools-dev
+  - mkdir -p $HOME/pbuilder $HOME/result
+  - test -e $HOME/pbuilder/${DIST}-base.tgz && pbuilder-dist ${DIST} update || pbuilder-dist
+    ${DIST} create --debootstrapopts --variant=buildd
+  - sudo apt-get purge -qq libwww-perl
+  - sudo apt-get autoremove -qq
 script:
-- debuild -S -uc
-- pbuilder-dist ${DIST} build ../*.dsc --buildresult $HOME/result/
+  - debuild -S -uc
+  - pbuilder-dist ${DIST} build ../*.dsc --buildresult $HOME/result/
 deploy:
   provider: packagecloud
   repository: dod
@@ -29,6 +30,6 @@ deploy:
   dist: ubuntu/$DIST
   package_glob: "$HOME/result/*.deb"
   on:
-    all_branches: true
+    tags: true
 notifications:
   email: false
