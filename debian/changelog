@@ -1,3 +1,10 @@
+wal-e-snapshot (2017021701-0heroku1~precise) precise; urgency=medium
+
+  * Remove manifest.
+  * Avoid STS expired token loops.
+
+ -- Department of Data <dod@heroku.com>  Fri, 17 Feb 2017 16:19:54 -0800
+
 wal-e-snapshot (2016011801-0heroku1~precise) precise; urgency=medium
 
   * Increment version to test new package building pipeline
