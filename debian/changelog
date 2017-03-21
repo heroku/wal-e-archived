@@ -1,3 +1,9 @@
+wal-e-snapshot (2017032101-0heroku1~precise) precise; urgency=medium
+
+  * Update directory ignore list.
+
+ -- Department of Data <dod@heroku.com>  Tue, 21 Mar 2017 15:35:25 -0800
+
 wal-e-snapshot (2017021701-0heroku1~precise) precise; urgency=medium
 
   * Remove manifest.
