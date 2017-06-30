@@ -7,8 +7,26 @@ python:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libevent-dev lzop pv gnupg
+  - sudo apt-get install -qq --no-install-recommends devscripts libwww-perl pbuilder aptitude ubuntu-dev-tools dh-make autotools-dev fakeroot python-setuptools
+  - mkdir -p $HOME/pbuilder $HOME/result
+  - test -e $HOME/pbuilder/${DIST}-base.tgz && pbuilder-dist ${DIST} update || pbuilder-dist ${DIST} create --debootstrapopts --variant=buildd
+  - sudo apt-get purge -qq libwww-perl
+  - sudo apt-get autoremove -qq
   - sudo rm -f /usr/share/google/boto/boto_plugins/*
 install: pip install tox-travis
-script: tox
+script:
+  - tox
+  - debuild -S -uc
+  - pbuilder-dist ${DIST} build ../*.dsc --buildresult $HOME/result/
+deploy:
+  provider: packagecloud
+  repository: dod
+  username: heroku
+  token:
+    secure: r3nXxMPrcuKNoG7dc6lxmKX6IJ8wkZ47d7LxdlT/y2KeT173l5Fq/8Sp+woJ1CC9XU8VFww43SlzWeyUGy0BXAfUPMS8LLdZ+YZssmAQyVNHsmjMCtn4ZS0EMcrStEJNqCvXu3nz+t3HasmMtxfDDzCkVZgBN1QEyj/vql9n+Zs=
+  dist: ubuntu/$DIST
+  package_glob: "$HOME/result/*.deb"
+  on:
+    tags: true
 notifications:
   email: false
