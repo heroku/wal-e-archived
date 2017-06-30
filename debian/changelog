@@ -1,3 +1,9 @@
+wal-e-snapshot (2017062901-0heroku1~precise) precise; urgency=medium
+
+  * Add Conflict, Provide and Replace to prevent co-installs of wal-e-aws
+
+ -- Greg Burek <gregburek@heroku.com>  Thu, 29 Jun 2017 21:18:13 +0000
+
 wal-e-snapshot (2017032101-0heroku1~precise) precise; urgency=medium
 
   * Update directory ignore list.

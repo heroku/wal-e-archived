@@ -13,6 +13,7 @@ Depends: ${misc:Depends}, ${python:Depends},
  libevent-1.4-2 (>= 1.4.13-stable), python-gevent (>= 0.13.1),
  python-boto (>=2.6.0), python-daemon (>= 1.5.2)
 XB-Python-Version: ${python:Versions}
-Provides: ${python:Provides}
-Conflicts: python-wal-e
+Provides: wal-e
+Conflicts: python-wal-e, wal-e-aws
+Replaces: wal-e-aws
 Description: PostgreSQL WAL-shipping for S3
