@@ -9,7 +9,7 @@ try:
     # https://github.com/Azure/azure-sdk-for-python/blob/master/ChangeLog.txt
     from azure.storage.blob import BlobService
 except ImportError:
-    from azure.storage import BlobService
+    from azure.storage.blob.blockblobservice import BlockBlobService
 
 from fast_wait import fast_wait
 from gevent import lock
@@ -70,7 +70,7 @@ def collect(monkeypatch):
     """
 
     collect = ContainerDeleteKeysCollector()
-    monkeypatch.setattr(BlobService, 'delete_blob', collect)
+    monkeypatch.setattr(BlockBlobService, 'delete_blob', collect)
 
     return collect
 
@@ -96,7 +96,7 @@ def test_construction():
 def test_close_error():
     """Ensure that attempts to use a closed Deleter results in an error."""
 
-    d = wabs_deleter.Deleter(BlobService('test', 'ing'), 'test-container')
+    d = wabs_deleter.Deleter(BlockBlobService('test', 'ing'), 'test-container')
     d.close()
 
     with pytest.raises(exception.UserCritical):
@@ -107,7 +107,7 @@ def test_processes_one_deletion(collect):
     key_name = 'test-key-name'
     b = B(name=key_name)
 
-    d = wabs_deleter.Deleter(BlobService('test', 'ing'), 'test-container')
+    d = wabs_deleter.Deleter(BlockBlobService('test', 'ing'), 'test-container')
     d.delete(b)
     d.close()
 
@@ -121,7 +121,7 @@ def test_processes_many_deletions(collect):
     # Construct boto S3 Keys from the generated names and delete them
     # all.
     blobs = [B(name=key_name) for key_name in target]
-    d = wabs_deleter.Deleter(BlobService('test', 'ing'), 'test-container')
+    d = wabs_deleter.Deleter(BlockBlobService('test', 'ing'), 'test-container')
 
     for b in blobs:
         d.delete(b)
@@ -140,7 +140,7 @@ def test_retry_on_normal_error(collect):
     b = B(name=key_name)
 
     collect.inject(Exception('Normal error'))
-    d = wabs_deleter.Deleter(BlobService('test', 'ing'), 'test-container')
+    d = wabs_deleter.Deleter(BlockBlobService('test', 'ing'), 'test-container')
     d.delete(b)
 
     # Since delete_keys will fail over and over again, aborted_keys
@@ -171,7 +171,7 @@ def test_no_retry_on_keyboadinterrupt(collect):
         pass
 
     collect.inject(MarkedKeyboardInterrupt('SIGINT, probably'))
-    d = wabs_deleter.Deleter(BlobService('test', 'ing'), 'test-container')
+    d = wabs_deleter.Deleter(BlockBlobService('test', 'ing'), 'test-container')
 
     with pytest.raises(MarkedKeyboardInterrupt):
         d.delete(b)

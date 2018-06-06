@@ -5,7 +5,7 @@ try:
     # https://github.com/Azure/azure-sdk-for-python/blob/master/ChangeLog.txt
     from azure.storage.blob import BlobService
 except ImportError:
-    from azure.storage import BlobService
+    from azure.storage.blob.blockblobservice import BlockBlobService
 
 from wal_e import log_help
 
@@ -29,9 +29,9 @@ class CallingInfo(object):
         return repr(self)
 
     def connect(self, creds):
-        """Return an azure BlobService instance.
+        """Return an azure BlockBlobService instance.
         """
-        return BlobService(account_name=creds.account_name,
+        return BlockBlobService(account_name=creds.account_name,
                            account_key=creds.account_key,
                            sas_token=creds.access_token,
                            protocol='https')

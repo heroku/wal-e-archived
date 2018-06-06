@@ -5,7 +5,7 @@ try:
     # https://github.com/Azure/azure-sdk-for-python/blob/master/ChangeLog.txt
     from azure.storage.blob import BlobService
 except ImportError:
-    from azure.storage import BlobService
+    from azure.storage.blob.blockblobservice import BlockBlobService
 
 import os
 
@@ -29,7 +29,7 @@ def no_real_wabs_credentials():
 
 
 def apathetic_container_delete(container_name, *args, **kwargs):
-    conn = BlobService(*args, **kwargs)
+    conn = BlockBlobService(*args, **kwargs)
     conn.delete_container(container_name)
 
     return conn
