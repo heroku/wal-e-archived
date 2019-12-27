@@ -54,7 +54,17 @@ def uri_put_file(creds, uri, fp, content_type=None, conn=None):
     if content_type is not None:
         k.content_type = content_type
 
-    k.set_contents_from_file(fp, encrypt_key=True)
+    kms_arn = os.getenv('WALE_S3_KMS_ARN')
+
+    headers = None
+
+    if kms_arn is not None:
+        headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn}
+
+    if headers is not None:
+        k.set_contents_from_file(fp, headers=headers)
+    else:
+        k.set_contents_from_file(fp, encrypt_key=True)
     return k
 
 

@@ -1,4 +1,4 @@
-import boto.exception
+import boto
 import os
 import pytest
 
@@ -96,3 +96,25 @@ def test_sigv4_only_region(tmpdir, monkeypatch):
         assert contents == results
 
     upload_download()
+
+
+def test_uri_put_file_encryption_headers(tmpdir, monkeypatch, mocker):
+    bucket_name = 'uri-put-file-encryption-headers'
+    creds = Credentials('AZZZZZZZZZZZZZZZZZZA',
+                        'secret')
+    data_url = 's3://{0}/data'.format(bucket_name)
+    source = str(tmpdir.join('source'))
+    contents = b'abcdefghijklmnopqrstuvwxyz\n' * 100
+    kms_arn = 'arn:aws:kms:us-east-1:999999999999:key/44664295-e83c-4d1c-8d93-ccd9c36f6ccb'  # noqa: E501
+    expected_headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn}
+
+    with open(source, 'wb') as f:
+        f.write(contents)
+
+    monkeypatch.setenv('WALE_S3_KMS_ARN', kms_arn)
+
+    mocker.patch('boto.s3.key.Key.set_contents_from_file')
+
+    with open(source) as f:
+        uri_put_file(creds, data_url, f)
+        boto.s3.key.Key.set_contents_from_file.assert_called_with(f, headers=expected_headers)  # noqa: E501
