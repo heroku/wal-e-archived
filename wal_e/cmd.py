@@ -697,7 +697,7 @@ def main():
         logger.log(level=e.severity,
                    msg=e.msg, detail=e.detail, hint=e.hint)
         sys.exit(1)
-    except Exception as e:
+    except Exception as e:  # noqa: F841
         logger.critical(
             msg='An unprocessed exception has avoided all error handling',
             detail=''.join(traceback.format_exception(*sys.exc_info())))

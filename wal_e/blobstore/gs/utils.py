@@ -97,7 +97,7 @@ def do_lzop_get(creds, url, path, decrypt, do_retry=True):
                     exc = g.get()
                     if exc is not None:
                         raise exc
-                except NotFound as e:
+                except NotFound as e:  # noqa: F841
                     # Do not retry if the blob not present, this
                     # can happen under normal situations.
                     pl.abort()
