@@ -32,9 +32,9 @@ class CallingInfo(object):
         """Return an azure BlockBlobService instance.
         """
         return BlockBlobService(account_name=creds.account_name,
-                           account_key=creds.account_key,
-                           sas_token=creds.access_token,
-                           protocol='https')
+                                account_key=creds.account_key,
+                                sas_token=creds.access_token,
+                                protocol='https')
 
 
 def from_store_name(container_name):

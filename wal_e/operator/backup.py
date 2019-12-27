@@ -236,9 +236,9 @@ class Backup(object):
             # bump).
 
             uri_put_file(self.creds,
-                             uploaded_to + '_backup_stop_sentinel.json',
-                             BytesIO(sentinel_content.encode("utf8")),
-                             content_type='application/json')
+                         uploaded_to + '_backup_stop_sentinel.json',
+                         BytesIO(sentinel_content.encode("utf8")),
+                         content_type='application/json')
         else:
             # NB: Other exceptions should be raised before this that
             # have more informative results, it is intended that this

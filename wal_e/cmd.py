@@ -90,7 +90,7 @@ logger = log_help.WalELogger('wal_e.main')
 
 
 def external_program_check(
-    to_check=frozenset([PSQL_BIN, LZOP_BIN, PV_BIN])):
+        to_check=frozenset([PSQL_BIN, LZOP_BIN, PV_BIN])):
     """
     Validates the existence and basic working-ness of other programs
 

@@ -21,7 +21,7 @@ class PgControlDataParser(object):
     def __init__(self, data_directory):
         self.data_directory = data_directory
         pg_config_proc = popen_sp([CONFIG_BIN],
-                             stdout=PIPE)
+                                  stdout=PIPE)
         output = pg_config_proc.communicate()[0].decode('utf-8')
         for line in output.split('\n'):
             parts = line.split('=')

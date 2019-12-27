@@ -42,7 +42,7 @@ class UserException(Exception):
 
     def __str__(self):
         return "{0}: {1}".format(getLevelName(self.severity),
-                WalELogger.fmt_logline(self.msg, self.detail, self.hint))
+                                 WalELogger.fmt_logline(self.msg, self.detail, self.hint))
 
 
 class UserCritical(UserException):

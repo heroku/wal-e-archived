@@ -99,8 +99,8 @@ class AwsInstanceProfileTestConfig(object):
 
         from boto import provider
         self.monkeypatch.setattr(provider.Provider,
-                            '_credentials_need_refresh',
-                            lambda self: False)
+                                 '_credentials_need_refresh',
+                                 lambda self: False)
 
         # Different versions of boto require slightly different return
         # formats.
@@ -112,7 +112,7 @@ class AwsInstanceProfileTestConfig(object):
         from boto import utils
 
         self.monkeypatch.setattr(utils, 'get_instance_metadata',
-                            lambda *args, **kwargs: m)
+                                 lambda *args, **kwargs: m)
 
     def main(self, *args):
         self.monkeypatch.setattr(

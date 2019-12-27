@@ -223,9 +223,9 @@ class _DeleteFromContext(object):
         return storage.base.SegmentNumber(log=d['log'], seg=d['seg'])
 
     def _delete_if_before(self, delete_horizon_segment_number,
-                            scanned_segment_number, key, type_of_thing):
+                          scanned_segment_number, key, type_of_thing):
         if scanned_segment_number.as_an_integer < \
-            delete_horizon_segment_number.as_an_integer:
+                delete_horizon_segment_number.as_an_integer:
             self._maybe_delete_key(key, type_of_thing)
 
     def _delete_base_backups_before(self, segment_info):
@@ -280,7 +280,7 @@ class _DeleteFromContext(object):
                     scanned_sn = \
                         self._groupdict_to_segment_number(match.groupdict())
                     self._delete_if_before(segment_info, scanned_sn, key,
-                                        'a base backup sentinel file')
+                                           'a base backup sentinel file')
             elif key_depth == version_depth:
                 match = re.match(
                     storage.BASE_BACKUP_REGEXP, key_parts[-2])
@@ -297,7 +297,7 @@ class _DeleteFromContext(object):
                     scanned_sn = \
                         self._groupdict_to_segment_number(match.groupdict())
                     self._delete_if_before(segment_info, scanned_sn, key,
-                                        'a extended version metadata file')
+                                           'a extended version metadata file')
             elif key_depth == volume_backup_depth:
                 # This has the depth of a base-backup volume, so try
                 # to match the expected pattern and delete it if the
@@ -322,7 +322,7 @@ class _DeleteFromContext(object):
                     scanned_sn = \
                         self._groupdict_to_segment_number(match.groupdict())
                     self._delete_if_before(segment_info, scanned_sn, key,
-                                        'a base backup volume')
+                                           'a base backup volume')
             else:
                 assert False
 
@@ -376,12 +376,12 @@ class _DeleteFromContext(object):
                     scanned_sn = self._groupdict_to_segment_number(
                         segment_match.groupdict())
                     self._delete_if_before(segment_info, scanned_sn, key,
-                                        'a wal file')
+                                           'a wal file')
                 elif label_match is not None:
                     scanned_sn = self._groupdict_to_segment_number(
                         label_match.groupdict())
                     self._delete_if_before(segment_info, scanned_sn, key,
-                                        'a backup history file')
+                                           'a backup history file')
                 elif history_match is not None:
                     # History (timeline) files do not have any actual
                     # WAL position information, so they are never

@@ -15,7 +15,7 @@ def test_rate_limit(tmpdir):
     payload, payload_file = create_bogus_payload(tmpdir)
 
     pl = pipeline.PipeViewerRateLimitFilter(1048576 * 100,
-                                           stdin=payload_file.open())
+                                            stdin=payload_file.open())
     pl.start()
     round_trip = pl.stdout.read()
     pl.finish()
