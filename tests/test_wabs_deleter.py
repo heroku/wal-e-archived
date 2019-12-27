@@ -7,7 +7,7 @@ try:
     #
     # See
     # https://github.com/Azure/azure-sdk-for-python/blob/master/ChangeLog.txt
-    from azure.storage.blob import BlobService
+    from azure.storage.blob import BlobService  # noqa: F401
 except ImportError:
     from azure.storage.blob.blockblobservice import BlockBlobService
 

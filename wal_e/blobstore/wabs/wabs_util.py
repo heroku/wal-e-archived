@@ -20,13 +20,13 @@ try:
     #
     # See
     # https://github.com/Azure/azure-sdk-for-python/blob/master/ChangeLog.txt
-    from azure.storage.blob import BlobService
+    from azure.storage.blob import BlobService  # noqa F401
 except ImportError:
     from azure.storage.blob.blockblobservice import BlockBlobService
     from azure.storage.blob.models import ContentSettings
 
 from . import calling_format
-from hashlib import md5
+from hashlib import md5  # noqa F401
 from urllib.parse import urlparse
 from wal_e import log_help
 from wal_e import files
