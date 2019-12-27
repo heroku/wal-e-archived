@@ -113,7 +113,7 @@ class Pipeline(object):
             else:
                 for command in self.commands:
                     command.finish()
-        except:
+        except:  # noqa: E722
             if exc_type:
                 # Re-raise inner exception rather than complaints during
                 # pipeline shutdown.
