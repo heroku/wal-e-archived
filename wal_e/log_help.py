@@ -173,7 +173,7 @@ class WalELogger(object):
         if structured is None:
             structured = {}
 
-        msg_parts.append('STRUCTURED: ' +
+        msg_parts.append('STRUCTURED: ' +  # noqa: W504
                          WalELogger._fmt_structured(structured))
 
         return '\n'.join(msg_parts)

@@ -95,7 +95,7 @@ def retry_with_count(side_effect_func):
         :type side_effect_func: function
         """
         def increment_context(exc_processor_cxt):
-            return ((exc_processor_cxt is None and 1) or
+            return ((exc_processor_cxt is None and 1) or  # noqa: W504
                     exc_processor_cxt + 1)
 
         if exc_processor_cxt is None:

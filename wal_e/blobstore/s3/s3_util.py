@@ -89,7 +89,7 @@ def do_lzop_get(creds, url, path, decrypt, do_retry=True):
                 detail=standard_detail_message(
                     "The socket error's message is '{0}'."
                     .format(socketmsg)))
-        elif (issubclass(typ, boto.exception.S3ResponseError) and
+        elif (issubclass(typ, boto.exception.S3ResponseError) and  # noqa: W504
               value.error_code == 'RequestTimeTooSkewed'):
             logger.info(msg='Retrying fetch because of a Request Skew time',
                         detail=standard_detail_message())

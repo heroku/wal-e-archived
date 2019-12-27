@@ -84,7 +84,7 @@ def test_cert_validation_sensitivity(monkeypatch):
     for bn in SUBDOMAIN_OK:
         if '.' not in bn:
             cinfo = calling_format.from_store_name(bn)
-            assert (cinfo.calling_format ==
+            assert (cinfo.calling_format ==  # noqa: W504
                     boto.s3.connection.SubdomainCallingFormat)
         else:
             assert '.' in bn

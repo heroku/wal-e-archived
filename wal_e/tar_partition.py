@@ -242,7 +242,7 @@ class TarPartition(list):
                     tar.addfile(et_info.tarinfo, f)
 
         except EnvironmentError as e:
-            if (e.errno == errno.ENOENT and
+            if (e.errno == errno.ENOENT and  # noqa: W504
                     e.filename == et_info.submitted_path):
                 # log a NOTICE/INFO that the file was unlinked.
                 # Ostensibly harmless (such unlinks should be replayed
@@ -383,7 +383,7 @@ def _segmentation_guts(root, file_paths, max_partition_size):
                     submitted_path=file_path)
 
             except EnvironmentError as e:
-                if (e.errno == errno.ENOENT and
+                if (e.errno == errno.ENOENT and  # noqa: W504
                         e.filename == file_path):
                     # log a NOTICE/INFO that the file was unlinked.
                     # Ostensibly harmless (such unlinks should be replayed
@@ -456,7 +456,7 @@ def partition(pg_cluster_dir):
 
     walker = os.walk(pg_cluster_dir, onerror=raise_walk_error)
     for root, dirnames, filenames in walker:
-        is_cluster_toplevel = (os.path.abspath(root) ==
+        is_cluster_toplevel = (os.path.abspath(root) ==  # noqa: W504
                                os.path.abspath(pg_cluster_dir))
 
         # Append "root" so the directory is created during restore

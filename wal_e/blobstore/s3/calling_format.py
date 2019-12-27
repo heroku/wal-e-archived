@@ -60,17 +60,17 @@ def _is_mostly_subdomain_compatible(bucket_name):
     issues that a bucket_name is able to use the
     SubdomainCallingFormat.
     """
-    return (bucket_name.lower() == bucket_name and
-            len(bucket_name) >= 3 and
-            len(bucket_name) <= 63 and
-            '_' not in bucket_name and
-            '..' not in bucket_name and
-            '-.' not in bucket_name and
-            '.-' not in bucket_name and
-            not bucket_name.startswith('-') and
-            not bucket_name.endswith('-') and
-            not bucket_name.startswith('.') and
-            not bucket_name.endswith('.') and
+    return (bucket_name.lower() == bucket_name and  # noqa: W504
+            len(bucket_name) >= 3 and  # noqa: W504
+            len(bucket_name) <= 63 and  # noqa: W504
+            '_' not in bucket_name and  # noqa: W504
+            '..' not in bucket_name and  # noqa: W504
+            '-.' not in bucket_name and  # noqa: W504
+            '.-' not in bucket_name and  # noqa: W504
+            not bucket_name.startswith('-') and  # noqa: W504
+            not bucket_name.endswith('-') and  # noqa: W504
+            not bucket_name.startswith('.') and  # noqa: W504
+            not bucket_name.endswith('.') and  # noqa: W504
             not _is_ipv4_like(bucket_name))
 
 

@@ -50,7 +50,7 @@ class PopenShim(object):
                 proc = subprocess.Popen(*args, **kwargs)
             except OSError as e:
                 if e.errno == errno.ENOMEM:
-                    should_retry = (self.max_tries is not None and
+                    should_retry = (self.max_tries is not None and  # noqa: W504 E501
                                     tries >= self.max_tries)
 
                     if should_retry:

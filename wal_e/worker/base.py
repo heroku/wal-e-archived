@@ -351,7 +351,7 @@ class _DeleteFromContext(object):
             elif key_depth == wal_key_depth:
                 segment_match = (re.match(storage.SEGMENT_REGEXP + r'\.lzo',
                                           key_parts[-1]))
-                label_match = (re.match(storage.SEGMENT_REGEXP +
+                label_match = (re.match(storage.SEGMENT_REGEXP +  # noqa: W504
                                         r'\.[A-F0-9]{8,8}.backup.lzo',
                                         key_parts[-1]))
                 history_match = re.match(r'[A-F0-9]{8,8}\.history',

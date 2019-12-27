@@ -75,7 +75,7 @@ class ByteDeque(object):
     def get(self, n):
         assert n <= self.byteSz, 'caller responsibility to ensure enough bytes'
 
-        if (n == self.byteSz and len(self._dq) == 1 and
+        if (n == self.byteSz and len(self._dq) == 1 and  # noqa: W504
                 isinstance(self._dq[0], bytes)):
             # Fast-path: if the deque has one element of the right
             # size *and* type (fragmentation can result in 'buffer'

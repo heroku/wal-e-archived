@@ -141,7 +141,7 @@ def external_program_check(
 
     if could_not_run:
         error_msgs.append(
-            'Could not run the following programs, are they installed? ' +
+            'Could not run the following programs, are they installed? ' +  # noqa: W504 E501
             ', '.join(could_not_run))
 
     if error_msgs:

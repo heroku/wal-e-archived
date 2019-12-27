@@ -24,7 +24,7 @@ SEGMENT_READY_REGEXP = SEGMENT_REGEXP + r'\.ready'
 BASE_BACKUP_REGEXP = (r'base_' + SEGMENT_REGEXP + r'_(?P<offset>[0-9A-F]{8})')
 
 COMPLETE_BASE_BACKUP_REGEXP = (
-    r'base_' + SEGMENT_REGEXP +
+    r'base_' + SEGMENT_REGEXP +  # noqa: W504
     r'_(?P<offset>[0-9A-F]{8})_backup_stop_sentinel\.json')
 
 VOLUME_REGEXP = (r'part_(\d+)\.tar\.lzo')
@@ -268,7 +268,7 @@ class StorageLayout(object):
 
     def basebackup_directory(self, backup_info):
         self._error_on_unexpected_version()
-        return (self.basebackups() +
+        return (self.basebackups() +  # noqa: W504
                 'base_{0}_{1}/'.format(
                 backup_info.wal_segment_backup_start,
                 backup_info.wal_segment_offset_backup_start))
@@ -282,12 +282,12 @@ class StorageLayout(object):
 
     def basebackup_tar_partition_directory(self, backup_info):
         self._error_on_unexpected_version()
-        return (self.basebackup_directory(backup_info) +
+        return (self.basebackup_directory(backup_info) +  # noqa: W504
                 'tar_partitions/')
 
     def basebackup_tar_partition(self, backup_info, part_name):
         self._error_on_unexpected_version()
-        return (self.basebackup_tar_partition_directory(backup_info) +
+        return (self.basebackup_tar_partition_directory(backup_info) +  # noqa: W504 E501
                 part_name)
 
     def wal_directory(self):

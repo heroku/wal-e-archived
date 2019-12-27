@@ -107,7 +107,7 @@ class PartitionUploader(object):
 
             def log_volume_failures_on_error(exc_tup, exc_processor_cxt):
                 def standard_detail_message(prefix=''):
-                    return (prefix +
+                    return (prefix +  # noqa: W504
                             '  There have been {n} attempts to send the '
                             'volume {name} so far.'.format(n=exc_processor_cxt,
                                                            name=tpart.name))
