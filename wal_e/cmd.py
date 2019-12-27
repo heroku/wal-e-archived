@@ -65,23 +65,23 @@ def ssl_monkey():
 
 ssl_monkey()
 
-import argparse
-import logging
-import os
-import re
-import subprocess
-import textwrap
-import traceback
+import argparse  # noqa E402
+import logging  # noqa E402
+import os  # noqa E402
+import re  # noqa E402
+import subprocess  # noqa E402
+import textwrap  # noqa E402
+import traceback  # noqa E402
 
-from wal_e import log_help
+from wal_e import log_help  # noqa E402
 
-from wal_e.exception import UserCritical
-from wal_e.exception import UserException
-from wal_e import storage
-from wal_e.piper import popen_sp
-from wal_e.worker.pg import PSQL_BIN, psql_csv_run
-from wal_e.pipeline import LZOP_BIN, PV_BIN, GPG_BIN
-from wal_e.worker.pg import CONFIG_BIN, PgControlDataParser
+from wal_e.exception import UserCritical  # noqa E402
+from wal_e.exception import UserException  # noqa E402
+from wal_e import storage  # noqa E402
+from wal_e.piper import popen_sp  # noqa E402
+from wal_e.worker.pg import PSQL_BIN, psql_csv_run  # noqa E402
+from wal_e.pipeline import LZOP_BIN, PV_BIN, GPG_BIN  # noqa E402
+from wal_e.worker.pg import CONFIG_BIN, PgControlDataParser  # noqa E402
 
 log_help.configure(
     format='%(name)-12s %(levelname)-8s %(message)s')
