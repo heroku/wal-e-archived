@@ -1,9 +1,24 @@
 language: python
-dist: trusty
-python:
-  - "3.4"
-  - "3.5"
-  - "3.6"
+jobs:
+  include:
+    - os: linux
+      dist: trusty
+      python: "3.4"
+    - os: linux
+      dist: trusty
+      python: "3.5"
+    - os: linux
+      dist: trusty
+      python: "3.6"
+    - os: linux
+      dist: xenial
+      python: "3.4"
+    - os: linux
+      dist: xenial
+      python: "3.5"
+    - os: linux
+      dist: xenial
+      python: "3.6"
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libevent-dev lzop pv gnupg
