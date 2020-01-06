@@ -1,5 +1,7 @@
 language: python
-dist: trusty
+dist:
+  - "trusty"
+  - "xenial"
 python:
   - "3.4"
   - "3.5"
