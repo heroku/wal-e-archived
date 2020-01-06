@@ -10,7 +10,7 @@ cache:
 before_cache:
   - rm -rf $HOME/pbuilder/aptcache
 script:
-  - curl https://$PACKAGECLOUD_TOKEN:@packagecloud.io/api/v1/distributions
+  - curl -I https://$PACKAGECLOUD_TOKEN:@packagecloud.io/api/v1/distributions
 deploy:
   provider: packagecloud
   repository: dod
