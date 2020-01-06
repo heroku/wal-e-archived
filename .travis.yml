@@ -17,14 +17,14 @@ install: pip install tox-travis
 script:
   - tox
   - debuild -S -uc
-  - pbuilder-dist ${DIST} build ../*.dsc --buildresult $HOME/result/
+  - pbuilder-dist ${TRAVIS_DIST} build ../*.dsc --buildresult $HOME/result/
 deploy:
   provider: packagecloud
   repository: dod
   username: heroku
   token:
     secure: r3nXxMPrcuKNoG7dc6lxmKX6IJ8wkZ47d7LxdlT/y2KeT173l5Fq/8Sp+woJ1CC9XU8VFww43SlzWeyUGy0BXAfUPMS8LLdZ+YZssmAQyVNHsmjMCtn4ZS0EMcrStEJNqCvXu3nz+t3HasmMtxfDDzCkVZgBN1QEyj/vql9n+Zs=
-  dist: ubuntu/$DIST
+  dist: ubuntu/$TRAVIS_DIST
   package_glob: "$HOME/result/*.deb"
   on:
     tags: true
