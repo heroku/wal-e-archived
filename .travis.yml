@@ -9,7 +9,7 @@ before_install:
   - sudo apt-get install -qq libevent-dev lzop pv gnupg
   - sudo apt-get install -qq --no-install-recommends devscripts libwww-perl pbuilder aptitude ubuntu-dev-tools dh-make autotools-dev fakeroot python-setuptools
   - mkdir -p $HOME/pbuilder $HOME/result
-  - test -e $HOME/pbuilder/${DIST}-base.tgz && pbuilder-dist ${DIST} update || pbuilder-dist ${DIST} create --debootstrapopts --variant=buildd
+  - test -e $HOME/pbuilder/${TRAVIS_DIST}-base.tgz && pbuilder-dist ${TRAVIS_DIST} update || pbuilder-dist ${TRAVIS_DIST} create --debootstrapopts --variant=buildd
   - sudo apt-get purge -qq libwww-perl
   - sudo apt-get autoremove -qq
   - sudo rm -f /usr/share/google/boto/boto_plugins/*
