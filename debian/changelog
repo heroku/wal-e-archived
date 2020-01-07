@@ -1,8 +1,8 @@
-wal-e-snapshot (2019123001-0heroku-1~precise) precise; urgency=medium
+wal-e-snapshot (2019123001-0heroku1~precise) precise; urgency=medium
 
   * Merge upstream v1.1.0b1
 
- -- Tom Reznick <treznick@heroku.com> Sun, 30 Dec 2019 02:39:19 +000
+ -- Tom Reznick <treznick@heroku.com> Sun, 30 Dec 2019 02:39:19 +0000
 
 wal-e-snapshot (2017062901-0heroku1~precise) precise; urgency=medium
 
