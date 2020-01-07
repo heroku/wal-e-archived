@@ -15,9 +15,9 @@ before_install:
   - sudo apt-get purge -qq libwww-perl
   - sudo apt-get autoremove -qq
   - sudo rm -f /usr/share/google/boto/boto_plugins/*
-install: pip install tox-travis
+install: sudo pip install tox-travis
 script:
-  - tox
+  - sudo tox
   - debuild -S -uc
   - pbuilder-dist ${TRAVIS_DIST} build ../*.dsc --buildresult $HOME/result/
 deploy:
