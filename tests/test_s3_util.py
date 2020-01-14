@@ -106,7 +106,8 @@ def test_uri_put_file_encryption_headers(tmpdir, monkeypatch, mocker):
     source = str(tmpdir.join('source'))
     contents = b'abcdefghijklmnopqrstuvwxyz\n' * 100
     kms_arn = 'arn:aws:kms:us-east-1:999999999999:key/44664295-e83c-4d1c-8d93-ccd9c36f6ccb'  # noqa: E501
-    expected_headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn}
+    expected_headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn,
+                        'x-amz-server-side-encryption': 'aws:kms'}
 
     with open(source, 'wb') as f:
         f.write(contents)

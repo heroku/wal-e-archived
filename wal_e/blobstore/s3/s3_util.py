@@ -59,7 +59,8 @@ def uri_put_file(creds, uri, fp, content_type=None, conn=None):
     headers = None
 
     if kms_arn is not None:
-        headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn}
+        headers = {'x-amz-server-side-encryption-aws-kms-key-id': kms_arn,
+                   'x-amz-server-side-encryption': 'aws:kms'}
 
     if headers is not None:
         k.set_contents_from_file(fp, headers=headers)
